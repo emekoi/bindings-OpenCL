@@ -4,10 +4,10 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 
-name:           OpenCL
+name:           bindings-OpenCL
 version:        1.2.0.1
 synopsis:       low-level OpenCL 1.2 bindings
-description:    Please see the README on GitHub at <https://github.com/emekoi/opencl#readme>
+description:    Please see the README on GitHub at <https://github.com/emekoi/bindings-OpenCL#readme>
 category:       GPU, FFI, Graphics
 homepage:       https://github.com/emekoi/opencl#readme
 bug-reports:    https://github.com/emekoi/opencl/issues
@@ -30,7 +30,7 @@ library
       Bindings.OpenCL
       Bindings.OpenCL.Constants
   other-modules:
-      Paths_OpenCL
+      Paths_bindings_OpenCL
   hs-source-dirs:
       src
   include-dirs:

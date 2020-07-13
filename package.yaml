@@ -1,4 +1,4 @@
-name:                OpenCL
+name:                bindings-OpenCL
 version:             1.2.0.1
 github:              "emekoi/opencl"
 license:             BSD3
@@ -17,7 +17,7 @@ category: GPU, FFI, Graphics
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description: Please see the README on GitHub at <https://github.com/emekoi/opencl#readme>
+description: Please see the README on GitHub at <https://github.com/emekoi/bindings-OpenCL#readme>
 
 dependencies:
 - base >= 4.7 && < 5
