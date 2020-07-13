@@ -31,3 +31,4 @@ build-tools:
 library:
   source-dirs: src
   include-dirs: include
+  extra-libraries: OpenCL

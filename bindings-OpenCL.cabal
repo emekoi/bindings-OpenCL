@@ -35,6 +35,8 @@ library
       src
   include-dirs:
       include
+  extra-libraries:
+      OpenCL
   build-tools:
       hsc2hs
   build-depends:
