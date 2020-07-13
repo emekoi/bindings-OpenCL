@@ -1,4 +1,3 @@
--- {-# LANGUAGE NoImplicitPrelude  #-}
 #include <bindings.dsl.h>
 #include "opencl-amalgamated.h"
 
@@ -13,71 +12,121 @@ import Foreign.C.String
 
 import Bindings.OpenCL.Constants
 
+#opaque_t cl_platform_id
+#opaque_t cl_device_id
+#opaque_t cl_context
+#opaque_t cl_command_queue
+#opaque_t cl_mem
+#opaque_t cl_program
+#opaque_t cl_kernel
+#opaque_t cl_event
+#opaque_t cl_sampler
+#opaque_t cl_GLsync
+
 #synonym_t cl_char , CSChar
-
 #synonym_t cl_uchar , CUChar
-
 #synonym_t cl_short , CShort
-
 #synonym_t cl_ushort , CUShort
-
 #synonym_t cl_int , CInt
-
 #synonym_t cl_uint , CUInt
-
 #synonym_t cl_long , CLong
-
 #synonym_t cl_ulong , CULong
-
 #synonym_t cl_half , CUShort
-
 #synonym_t cl_float , CFloat
-
 #synonym_t cl_double , CDouble
-
 #synonym_t cl_GLuint , CUInt
-
 #synonym_t cl_GLint , CInt
-
 #synonym_t cl_GLenum , CUInt
-
 #synonym_t __cl_float4 , CFloat
-
 #synonym_t __cl_uchar16 , CUChar
-
 #synonym_t __cl_char16 , CSChar
-
 #synonym_t __cl_ushort8 , CUShort
-
 #synonym_t __cl_short8 , CShort
-
 #synonym_t __cl_uint4 , CUInt
-
 #synonym_t __cl_int4 , CInt
-
 #synonym_t __cl_ulong2 , CULong
-
 #synonym_t __cl_long2 , CLong
-
 #synonym_t __cl_double2 , CDouble
-
 #synonym_t __cl_uchar8 , CUChar
-
 #synonym_t __cl_char8 , CSChar
-
 #synonym_t __cl_ushort4 , CUShort
-
 #synonym_t __cl_short4 , CShort
-
 #synonym_t __cl_uint2 , CUInt
-
 #synonym_t __cl_int2 , CInt
-
 #synonym_t __cl_ulong1 , CULong
-
 #synonym_t __cl_long1 , CLong
-
 #synonym_t __cl_float2 , CFloat
+#synonym_t cl_char3 , <cl_char4>
+#synonym_t cl_uchar3 , <cl_uchar4>
+#synonym_t cl_short3 , <cl_short4>
+#synonym_t cl_ushort3 , <cl_ushort4>
+#synonym_t cl_half3 , <cl_half4>
+#synonym_t cl_int3 , <cl_int4>
+#synonym_t cl_uint3 , <cl_uint4>
+#synonym_t cl_long3 , <cl_long4>
+#synonym_t cl_ulong3 , <cl_ulong4>
+#synonym_t cl_float3 , <cl_float4>
+#synonym_t cl_double3 , <cl_double4>
+#synonym_t cl_bool , CUInt
+#synonym_t cl_bitfield , CULong
+#synonym_t cl_device_type , CULong
+#synonym_t cl_platform_info , CUInt
+#synonym_t cl_device_info , CUInt
+#synonym_t cl_device_fp_config , CULong
+#synonym_t cl_device_mem_cache_type , CUInt
+#synonym_t cl_device_local_mem_type , CUInt
+#synonym_t cl_device_exec_capabilities , CULong
+#synonym_t cl_device_svm_capabilities , CULong
+#synonym_t cl_command_queue_properties , CULong
+#synonym_t cl_device_partition_property , IntPtr
+#synonym_t cl_device_affinity_domain , CULong
+#synonym_t cl_context_properties , IntPtr
+#synonym_t cl_context_info , CUInt
+#synonym_t cl_queue_properties , CULong
+#synonym_t cl_command_queue_info , CUInt
+#synonym_t cl_channel_order , CUInt
+#synonym_t cl_channel_type , CUInt
+#synonym_t cl_mem_flags , CULong
+#synonym_t cl_svm_mem_flags , CULong
+#synonym_t cl_mem_object_type , CUInt
+#synonym_t cl_mem_info , CUInt
+#synonym_t cl_mem_migration_flags , CULong
+#synonym_t cl_image_info , CUInt
+#synonym_t cl_buffer_create_type , CUInt
+#synonym_t cl_addressing_mode , CUInt
+#synonym_t cl_filter_mode , CUInt
+#synonym_t cl_sampler_info , CUInt
+#synonym_t cl_map_flags , CULong
+#synonym_t cl_pipe_properties , IntPtr
+#synonym_t cl_pipe_info , CUInt
+#synonym_t cl_program_info , CUInt
+#synonym_t cl_program_build_info , CUInt
+#synonym_t cl_program_binary_type , CUInt
+#synonym_t cl_build_status , CInt
+#synonym_t cl_kernel_info , CUInt
+#synonym_t cl_kernel_arg_info , CUInt
+#synonym_t cl_kernel_arg_address_qualifier , CUInt
+#synonym_t cl_kernel_arg_access_qualifier , CUInt
+#synonym_t cl_kernel_arg_type_qualifier , CULong
+#synonym_t cl_kernel_work_group_info , CUInt
+#synonym_t cl_kernel_sub_group_info , CUInt
+#synonym_t cl_event_info , CUInt
+#synonym_t cl_command_type , CUInt
+#synonym_t cl_profiling_info , CUInt
+#synonym_t cl_sampler_properties , CULong
+#synonym_t cl_kernel_exec_info , CUInt
+#synonym_t cl_gl_object_type , CUInt
+#synonym_t cl_gl_texture_info , CUInt
+#synonym_t cl_gl_platform_info , CUInt
+#synonym_t cl_gl_context_info , CUInt
+#synonym_t cl_device_partition_property_ext , CULong
+#synonym_t cl_image_pitch_info_qcom , CUInt
+#synonym_t cl_queue_priority_khr , CUInt
+#synonym_t cl_queue_throttle_khr , CUInt
+#synonym_t cl_import_properties_arm , IntPtr
+#synonym_t cl_svm_mem_flags_arm , CULong
+#synonym_t cl_kernel_exec_info_arm , CUInt
+#synonym_t cl_device_svm_capabilities_arm , CULong
 
 #starttype cl_char2
 #array_field s , CSChar
@@ -86,8 +135,6 @@ import Bindings.OpenCL.Constants
 #starttype cl_char4
 #array_field s , CSChar
 #stoptype
-
-#synonym_t cl_char3 , <cl_char4>
 
 #starttype cl_char8
 #array_field s , CSChar
@@ -108,8 +155,6 @@ import Bindings.OpenCL.Constants
 #array_field s , CUChar
 #stoptype
 
-#synonym_t cl_uchar3 , <cl_uchar4>
-
 #starttype cl_uchar8
 #array_field s , CUChar
 #field v8 , CUChar
@@ -129,8 +174,6 @@ import Bindings.OpenCL.Constants
 #array_field s , CShort
 #field v4 , CShort
 #stoptype
-
-#synonym_t cl_short3 , <cl_short4>
 
 #starttype cl_short8
 #array_field s , CShort
@@ -153,8 +196,6 @@ import Bindings.OpenCL.Constants
 #field v4 , CUShort
 #stoptype
 
-#synonym_t cl_ushort3 , <cl_ushort4>
-
 #starttype cl_ushort8
 #array_field s , CUShort
 #array_field v4 , CUShort
@@ -175,8 +216,6 @@ import Bindings.OpenCL.Constants
 #array_field s , CUShort
 #stoptype
 
-#synonym_t cl_half3 , <cl_half4>
-
 #starttype cl_half8
 #array_field s , CUShort
 #stoptype
@@ -195,8 +234,6 @@ import Bindings.OpenCL.Constants
 #array_field v2 , CInt
 #field v4 , CInt
 #stoptype
-
-#synonym_t cl_int3 , <cl_int4>
 
 #starttype cl_int8
 #array_field s , CInt
@@ -221,8 +258,6 @@ import Bindings.OpenCL.Constants
 #field v4 , CUInt
 #stoptype
 
-#synonym_t cl_uint3 , <cl_uint4>
-
 #starttype cl_uint8
 #array_field s , CUInt
 #array_field v2 , CUInt
@@ -245,8 +280,6 @@ import Bindings.OpenCL.Constants
 #array_field v2 , CLong
 #stoptype
 
-#synonym_t cl_long3 , <cl_long4>
-
 #starttype cl_long8
 #array_field s , CLong
 #array_field v2 , CLong
@@ -266,8 +299,6 @@ import Bindings.OpenCL.Constants
 #array_field s , CULong
 #array_field v2 , CULong
 #stoptype
-
-#synonym_t cl_ulong3 , <cl_ulong4>
 
 #starttype cl_ulong8
 #array_field s , CULong
@@ -289,8 +320,6 @@ import Bindings.OpenCL.Constants
 #array_field v2 , CFloat
 #field v4 , CFloat
 #stoptype
-
-#synonym_t cl_float3 , <cl_float4>
 
 #starttype cl_float8
 #array_field s , CFloat
@@ -314,8 +343,6 @@ import Bindings.OpenCL.Constants
 #array_field v2 , CDouble
 #stoptype
 
-#synonym_t cl_double3 , <cl_double4>
-
 #starttype cl_double8
 #array_field s , CDouble
 #array_field v2 , CDouble
@@ -325,111 +352,6 @@ import Bindings.OpenCL.Constants
 #array_field s , CDouble
 #array_field v2 , CDouble
 #stoptype
-#opaque_t cl_platform_id
-#opaque_t cl_device_id
-#opaque_t cl_context
-#opaque_t cl_command_queue
-#opaque_t cl_mem
-#opaque_t cl_program
-#opaque_t cl_kernel
-#opaque_t cl_event
-#opaque_t cl_sampler
-
-#synonym_t cl_bool , CUInt
-
-#synonym_t cl_bitfield , CULong
-
-#synonym_t cl_device_type , CULong
-
-#synonym_t cl_platform_info , CUInt
-
-#synonym_t cl_device_info , CUInt
-
-#synonym_t cl_device_fp_config , CULong
-
-#synonym_t cl_device_mem_cache_type , CUInt
-
-#synonym_t cl_device_local_mem_type , CUInt
-
-#synonym_t cl_device_exec_capabilities , CULong
-
-#synonym_t cl_device_svm_capabilities , CULong
-
-#synonym_t cl_command_queue_properties , CULong
-
-#synonym_t cl_device_partition_property , IntPtr
-
-#synonym_t cl_device_affinity_domain , CULong
-
-#synonym_t cl_context_properties , IntPtr
-
-#synonym_t cl_context_info , CUInt
-
-#synonym_t cl_queue_properties , CULong
-
-#synonym_t cl_command_queue_info , CUInt
-
-#synonym_t cl_channel_order , CUInt
-
-#synonym_t cl_channel_type , CUInt
-
-#synonym_t cl_mem_flags , CULong
-
-#synonym_t cl_svm_mem_flags , CULong
-
-#synonym_t cl_mem_object_type , CUInt
-
-#synonym_t cl_mem_info , CUInt
-
-#synonym_t cl_mem_migration_flags , CULong
-
-#synonym_t cl_image_info , CUInt
-
-#synonym_t cl_buffer_create_type , CUInt
-
-#synonym_t cl_addressing_mode , CUInt
-
-#synonym_t cl_filter_mode , CUInt
-
-#synonym_t cl_sampler_info , CUInt
-
-#synonym_t cl_map_flags , CULong
-
-#synonym_t cl_pipe_properties , IntPtr
-
-#synonym_t cl_pipe_info , CUInt
-
-#synonym_t cl_program_info , CUInt
-
-#synonym_t cl_program_build_info , CUInt
-
-#synonym_t cl_program_binary_type , CUInt
-
-#synonym_t cl_build_status , CInt
-
-#synonym_t cl_kernel_info , CUInt
-
-#synonym_t cl_kernel_arg_info , CUInt
-
-#synonym_t cl_kernel_arg_address_qualifier , CUInt
-
-#synonym_t cl_kernel_arg_access_qualifier , CUInt
-
-#synonym_t cl_kernel_arg_type_qualifier , CULong
-
-#synonym_t cl_kernel_work_group_info , CUInt
-
-#synonym_t cl_kernel_sub_group_info , CUInt
-
-#synonym_t cl_event_info , CUInt
-
-#synonym_t cl_command_type , CUInt
-
-#synonym_t cl_profiling_info , CUInt
-
-#synonym_t cl_sampler_properties , CULong
-
-#synonym_t cl_kernel_exec_info , CUInt
 
 #starttype cl_image_format
 #field image_channel_order , CUInt
@@ -452,6 +374,26 @@ import Bindings.OpenCL.Constants
 #field origin , CSize
 #field size , CSize
 #stoptype
+
+#starttype cl_mem_ext_host_ptr
+#field allocation_type , CUInt
+#field host_cache_policy , CUInt
+#stoptype
+
+#starttype cl_mem_ion_host_ptr
+#field ext_host_ptr , <cl_mem_ext_host_ptr>
+#field ion_filedesc , CInt
+#field ion_hostptr , Ptr ()
+#stoptype
+
+#callback clGetGLContextInfoKHR_fn , Ptr IntPtr -> CUInt -> CSize -> Ptr () -> Ptr CSize -> IO CInt
+#callback clIcdGetPlatformIDsKHR_fn , CUInt -> Ptr <cl_platform_id> -> Ptr CUInt -> IO CInt
+#callback clTerminateContextKHR_fn , Ptr <cl_context> -> IO CInt
+#callback clReleaseDeviceEXT_fn , Ptr <cl_device_id> -> IO CInt
+#callback clRetainDeviceEXT_fn , Ptr <cl_device_id> -> IO CInt
+#callback clCreateSubDevicesEXT_fn , Ptr <cl_device_id> -> Ptr CULong -> CUInt -> Ptr <cl_device_id> -> Ptr CUInt -> IO CInt
+#callback clGetKernelSubGroupInfoKHR_fn , Ptr <cl_kernel> -> Ptr <cl_device_id> -> CUInt -> CSize -> Ptr () -> CSize -> Ptr () -> Ptr CSize -> IO CInt
+
 #ccall clGetPlatformIDs , CUInt -> Ptr <cl_platform_id> -> Ptr CUInt -> IO CInt
 #ccall clGetPlatformInfo , Ptr <cl_platform_id> -> CUInt -> CSize -> Ptr () -> Ptr CSize -> IO CInt
 #ccall clGetDeviceIDs , Ptr <cl_platform_id> -> CULong -> CUInt -> Ptr <cl_device_id> -> Ptr CUInt -> IO CInt
@@ -562,13 +504,6 @@ import Bindings.OpenCL.Constants
 #ccall clCreateCommandQueue , Ptr <cl_context> -> Ptr <cl_device_id> -> CULong -> Ptr CInt -> IO (Ptr <cl_command_queue>)
 #ccall clCreateSampler , Ptr <cl_context> -> CUInt -> CUInt -> CUInt -> Ptr CInt -> IO (Ptr <cl_sampler>)
 #ccall clEnqueueTask , Ptr <cl_command_queue> -> Ptr <cl_kernel> -> CUInt -> Ptr <cl_event> -> Ptr <cl_event> -> IO CInt
-
-#synonym_t cl_gl_object_type , CUInt
-
-#synonym_t cl_gl_texture_info , CUInt
-
-#synonym_t cl_gl_platform_info , CUInt
-#opaque_t cl_GLsync
 #ccall clCreateFromGLBuffer , Ptr <cl_context> -> CULong -> CUInt -> Ptr CInt -> IO (Ptr <cl_mem>)
 #ccall clCreateFromGLTexture , Ptr <cl_context> -> CULong -> CUInt -> CInt -> CUInt -> Ptr CInt -> IO (Ptr <cl_mem>)
 #ccall clCreateFromGLRenderbuffer , Ptr <cl_context> -> CULong -> CUInt -> Ptr CInt -> IO (Ptr <cl_mem>)
@@ -578,58 +513,22 @@ import Bindings.OpenCL.Constants
 #ccall clEnqueueReleaseGLObjects , Ptr <cl_command_queue> -> CUInt -> Ptr <cl_mem> -> CUInt -> Ptr <cl_event> -> Ptr <cl_event> -> IO CInt
 #ccall clCreateFromGLTexture2D , Ptr <cl_context> -> CULong -> CUInt -> CInt -> CUInt -> Ptr CInt -> IO (Ptr <cl_mem>)
 #ccall clCreateFromGLTexture3D , Ptr <cl_context> -> CULong -> CUInt -> CInt -> CUInt -> Ptr CInt -> IO (Ptr <cl_mem>)
-
-#synonym_t cl_gl_context_info , CUInt
 #ccall clGetGLContextInfoKHR , Ptr IntPtr -> CUInt -> CSize -> Ptr () -> Ptr CSize -> IO CInt
-#callback clGetGLContextInfoKHR_fn , Ptr IntPtr -> CUInt -> CSize -> Ptr () -> Ptr CSize -> IO CInt
 #ccall clCreateEventFromGLsyncKHR , Ptr <cl_context> -> Ptr <cl_GLsync> -> Ptr CInt -> IO (Ptr <cl_event>)
 #ccall clSetMemObjectDestructorAPPLE , Ptr <cl_mem> -> FunPtr (Ptr <cl_mem> -> Ptr () -> IO ()) -> Ptr () -> IO CInt
 #ccall clLogMessagesToSystemLogAPPLE , CString -> Ptr () -> CSize -> Ptr () -> IO ()
 #ccall clLogMessagesToStdoutAPPLE , CString -> Ptr () -> CSize -> Ptr () -> IO ()
 #ccall clLogMessagesToStderrAPPLE , CString -> Ptr () -> CSize -> Ptr () -> IO ()
 #ccall clIcdGetPlatformIDsKHR , CUInt -> Ptr <cl_platform_id> -> Ptr CUInt -> IO CInt
-#callback clIcdGetPlatformIDsKHR_fn , CUInt -> Ptr <cl_platform_id> -> Ptr CUInt -> IO CInt
 #ccall clTerminateContextKHR , Ptr <cl_context> -> IO CInt
-#callback clTerminateContextKHR_fn , Ptr <cl_context> -> IO CInt
 #ccall clReleaseDeviceEXT , Ptr <cl_device_id> -> IO CInt
-#callback clReleaseDeviceEXT_fn , Ptr <cl_device_id> -> IO CInt
 #ccall clRetainDeviceEXT , Ptr <cl_device_id> -> IO CInt
-#callback clRetainDeviceEXT_fn , Ptr <cl_device_id> -> IO CInt
-
-#synonym_t cl_device_partition_property_ext , CULong
 #ccall clCreateSubDevicesEXT , Ptr <cl_device_id> -> Ptr CULong -> CUInt -> Ptr <cl_device_id> -> Ptr CUInt -> IO CInt
-#callback clCreateSubDevicesEXT_fn , Ptr <cl_device_id> -> Ptr CULong -> CUInt -> Ptr <cl_device_id> -> Ptr CUInt -> IO CInt
-
-#synonym_t cl_image_pitch_info_qcom , CUInt
 #ccall clGetDeviceImageInfoQCOM , Ptr <cl_device_id> -> CSize -> CSize -> Ptr <cl_image_format> -> CUInt -> CSize -> Ptr () -> Ptr CSize -> IO CInt
-
-#starttype cl_mem_ext_host_ptr
-#field allocation_type , CUInt
-#field host_cache_policy , CUInt
-#stoptype
-
-#starttype cl_mem_ion_host_ptr
-#field ext_host_ptr , <cl_mem_ext_host_ptr>
-#field ion_filedesc , CInt
-#field ion_hostptr , Ptr ()
-#stoptype
 #ccall clEnqueueAcquireGrallocObjectsIMG , Ptr <cl_command_queue> -> CUInt -> Ptr <cl_mem> -> CUInt -> Ptr <cl_event> -> Ptr <cl_event> -> IO CInt
 #ccall clEnqueueReleaseGrallocObjectsIMG , Ptr <cl_command_queue> -> CUInt -> Ptr <cl_mem> -> CUInt -> Ptr <cl_event> -> Ptr <cl_event> -> IO CInt
 #ccall clGetKernelSubGroupInfoKHR , Ptr <cl_kernel> -> Ptr <cl_device_id> -> CUInt -> CSize -> Ptr () -> CSize -> Ptr () -> Ptr CSize -> IO CInt
-#callback clGetKernelSubGroupInfoKHR_fn , Ptr <cl_kernel> -> Ptr <cl_device_id> -> CUInt -> CSize -> Ptr () -> CSize -> Ptr () -> Ptr CSize -> IO CInt
-
-#synonym_t cl_queue_priority_khr , CUInt
-
-#synonym_t cl_queue_throttle_khr , CUInt
-
-#synonym_t cl_import_properties_arm , IntPtr
 #ccall clImportMemoryARM , Ptr <cl_context> -> CULong -> Ptr IntPtr -> Ptr () -> CSize -> Ptr CInt -> IO (Ptr <cl_mem>)
-
-#synonym_t cl_svm_mem_flags_arm , CULong
-
-#synonym_t cl_kernel_exec_info_arm , CUInt
-
-#synonym_t cl_device_svm_capabilities_arm , CULong
 #ccall clSVMAllocARM , Ptr <cl_context> -> CULong -> CSize -> CUInt -> IO (Ptr ())
 #ccall clSVMFreeARM , Ptr <cl_context> -> Ptr () -> IO ()
 #ccall clEnqueueSVMFreeARM , Ptr <cl_command_queue> -> CUInt -> Ptr (Ptr ()) -> FunPtr (Ptr <cl_command_queue> -> CUInt -> Ptr (Ptr ()) -> Ptr () -> IO ()) -> Ptr () -> CUInt -> Ptr <cl_event> -> Ptr <cl_event> -> IO CInt
