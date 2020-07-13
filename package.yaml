@@ -1,0 +1,33 @@
+name:                OpenCL
+version:             1.2.0.1
+github:              "emekoi/opencl"
+license:             BSD3
+author:              "emekoi"
+maintainer:          "emekankurumeh@outlook.com"
+copyright:           "Copyright (c) 2020 Emeka Nkurumeh"
+
+extra-source-files:
+- README.md
+- include/opencl-amalgamated.h
+
+# Metadata used when publishing your package
+synopsis: low-level OpenCL 1.2 bindings
+category: GPU, FFI, Graphics
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description: Please see the README on GitHub at <https://github.com/emekoi/opencl#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- bytestring >= 0.10.10.0
+- mtl >= 2.2.2
+- bindings-DSL >= 1.0.25
+
+build-tools:
+  - hsc2hs
+
+library:
+  source-dirs: src
+  include-dirs: include
