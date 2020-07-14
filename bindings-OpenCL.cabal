@@ -29,6 +29,8 @@ library
   exposed-modules:
       Bindings.OpenCL
       Bindings.OpenCL.Constants
+      Bindings.OpenCL.Functions
+      Bindings.OpenCL.Types
   other-modules:
       Paths_bindings_OpenCL
   hs-source-dirs:
