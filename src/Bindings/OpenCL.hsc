@@ -515,10 +515,14 @@ import Bindings.OpenCL.Constants
 #ccall clCreateFromGLTexture3D , Ptr <cl_context> -> CULong -> CUInt -> CInt -> CUInt -> Ptr CInt -> IO (Ptr <cl_mem>)
 #ccall clGetGLContextInfoKHR , Ptr IntPtr -> CUInt -> CSize -> Ptr () -> Ptr CSize -> IO CInt
 #ccall clCreateEventFromGLsyncKHR , Ptr <cl_context> -> Ptr <cl_GLsync> -> Ptr CInt -> IO (Ptr <cl_event>)
+
+#if defined(__APPLE__)
 #ccall clSetMemObjectDestructorAPPLE , Ptr <cl_mem> -> FunPtr (Ptr <cl_mem> -> Ptr () -> IO ()) -> Ptr () -> IO CInt
 #ccall clLogMessagesToSystemLogAPPLE , CString -> Ptr () -> CSize -> Ptr () -> IO ()
 #ccall clLogMessagesToStdoutAPPLE , CString -> Ptr () -> CSize -> Ptr () -> IO ()
 #ccall clLogMessagesToStderrAPPLE , CString -> Ptr () -> CSize -> Ptr () -> IO ()
+#endif
+
 #ccall clIcdGetPlatformIDsKHR , CUInt -> Ptr <cl_platform_id> -> Ptr CUInt -> IO CInt
 #ccall clTerminateContextKHR , Ptr <cl_context> -> IO CInt
 #ccall clReleaseDeviceEXT , Ptr <cl_device_id> -> IO CInt
