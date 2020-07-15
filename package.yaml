@@ -31,4 +31,8 @@ build-tools:
 library:
   source-dirs: src
   include-dirs: include
-  extra-libraries: OpenCL
+  when:
+    - condition: os(darwin) || os(linux)
+      frameworks: OpenCL
+    - condition: os(windows) || os(linux)
+      extra-libraries: OpenCL

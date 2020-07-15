@@ -37,8 +37,6 @@ library
       src
   include-dirs:
       include
-  extra-libraries:
-      OpenCL
   build-tools:
       hsc2hs
   build-depends:
@@ -46,4 +44,10 @@ library
     , bindings-DSL >=1.0.25
     , bytestring >=0.10.10.0
     , mtl >=2.2.2
+  if os(darwin) || os(linux)
+    frameworks:
+        OpenCL
+  if os(windows) || os(linux)
+    extra-libraries:
+        OpenCL
   default-language: Haskell2010
